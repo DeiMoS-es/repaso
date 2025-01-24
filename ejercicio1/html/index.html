@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="tareas">
+        <form id="formulario" action="../php/tareas.php" method="post">
+            <label for="title">Titulo:</label>
+            <input type="text" id="title" name="title">
+            <br>
+            <label for="description">Descripción</label>
+            <input type="text" id="description" name="description">
+            <br>
+            <label for="estado">Estado</label>
+            <br>
+            <label>
+                <input type="radio" name="estado" value="pendiente">Pendiente
+            </label>
+            <label>
+                <input type="radio" name="estado" value="progreso">En progreso
+            </label>
+            <label>
+                <input type="radio" name="estado" value="completada">Completada
+            </label>
+            <br>
+            <input id="enviar" type="submit">
+        </form>
+    </div>
+    <div id="tareas"></div>
+</body>
+<script>
+    $(document).ready(function(){
+        //Obtener Tasks
+        $.ajax({
+            url: '../php/tareas.php',
+            method: 'GET',
+            success : function(data){
+                $("#tareas").html(data);
+            },error: function(){
+                console.error("Error en la petición");
+            }
+        });
+        // Editar Task
+        $(document).on("click", ".acciones.editar", editar);
+        // Eliminar Task
+        $(document).on("click", ".acciones.eliminar", eliminar);
+        // funciones botones
+        function eliminar(){
+            const divBoton = $(this);
+            const titleTask = getTitleTask(divBoton);
+            $.ajax({
+                url: '../php/tareas.php',
+                method: 'DELETE',
+                data: JSON.stringify({titleTask}),
+                contentType: 'application/json',
+                success: function(data){
+                    $("#tareas").html(data);
+                },
+                error: function(){
+                    console.error("Error al eliminar una tarea.")
+                }
+            });
+        };
+
+        function editar(){
+            const divTasks = $("#tareas");
+            const divBoton = $(this);
+            const titleTask = getTitleTask(divBoton);
+            formEditar(divTasks, titleTask)
+            
+        };
+
+        function formEditar(divTasks, titleTask){
+            let divForm = $("#editar-form");
+            console.log(divForm);
+            if(divForm.length > 0){
+                divForm.remove();
+            }else{
+                divForm = $(`
+                    <form id="editar-form">
+                        <label for="nuevoEstado">Nuevo Estado:</label>
+                        <br>
+                        <label>
+                            <input type="radio" name="nuevoEstado" value="pendiente">Pendiente
+                        </label>
+                         <label>
+                            <input type="radio" name="nuevoEstado" value="progreso">En progreso
+                        </label>
+                         <label>
+                            <input type="radio" name="nuevoEstado" value="completada">Completada
+                        </label>
+                        <br>
+                        <input type="hidden" name="title" value="${titleTask}">
+                        <input type="submit" value="Guardar cambios">
+                    </form>
+                `);
+                divTasks.append(divForm);
+                sendEstado(titleTask);
+            }
+        }
+
+        //funcion para editar cambios
+        function sendEstado(titleTask){
+            $("#editar-form").on("submit", function(event){
+                event.preventDefault();
+                const nuevoEstado = $(this).find("input[name='nuevoEstado']:checked").val();
+                $.ajax({
+                    url: '../php/tareas.php',
+                    method: 'PUT',
+                    data: JSON.stringify({titleTask: titleTask, estado: nuevoEstado}),
+                    success: function(data){
+                        $("#tareas").html(data);
+                    },
+                    error: function(){
+                        console.error("Error al editar la tarea.");
+                    }
+                });
+            })
+        };
+        // Obtener el título de la tarea
+        // Recibe el btn en el que se realiza el evento
+        function getTitleTask(boton){
+            const divPadre = $(boton).parent();// como hay varios btns en el mismo td, obtenemos el td padre del btn
+            const titleTask = divPadre.parent().children().first();// obtengo el <tr> que engloba todos los td y el que está en primera posición es el correspondiente al title
+            const titleTaskText = titleTask.text();
+            // console.log(titleTaskText);
+            return titleTaskText;
+        };
+    });
+    // Crear Task
+    $("#formulario").on("submit", function(event){
+            event.preventDefault();
+            $.ajax({
+                url: '../php/tareas.php',
+                method: 'POST',
+                data: $(this).serialize(),
+                success : function(data){
+                    $("#tareas").html(data);
+                    location.reload();
+                },
+                error: function(){
+                    console.error("Error en la petición");
+                }
+            })
+        });
+</script>
+</html>
