@@ -14,5 +14,12 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
     tableTasks($tasks);
     // var_dump($tasks);
 }
+elseif($_SERVER['REQUEST_METHOD'] === 'POST'){
+    echo"hola";
+    $inputs = file_get_contents("php://input");
+    var_dump($inputs);
+}else{
+    echo "nada.";
+}
 // echo $exisTable;
 ?>

@@ -5,9 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../javascript/index.js"></script>
-    <title>TAreas</title>
+    <title>Tareas</title>
 </head>
 <body>
+    <h1>Tus Tareas</h1>
     <div class="container"></div>
+    <h2>Nueva tarea</h2>
+    <form id="add-task" action="../php/scripts/tareas.php" method="POST">
+        <label for="titulo">Titulo de la tarea</label>
+        <input type="text" name="titulo">
+        <br>
+        <label for="descripcion">Descripción</label>
+        <input type="text" name="descripcion">
+        <br>
+        <label for="estado">Estado de la tarea: </label>
+        <label><input type="radio" name="estado" value="pendiente">Pendiente</label>
+        <label><input type="radio" name="estado" value="curso">En curso</label>
+        <label><input type="radio" name="estado" value="completada">Completada</label>
+        <br>
+        <input type="submit">
+    </form>
 </body>
 </html>

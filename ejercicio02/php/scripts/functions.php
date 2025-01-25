@@ -32,4 +32,8 @@ function getAllTasks($conn){
         return json_encode(["message" => "No hay tareas."]);
     }
 };
+
+function createTask($task){
+    
+}
 ?>
