@@ -25,7 +25,7 @@ function getAllTasks($conn){
     $tasks = [];
     if($results->num_rows > 0){
         while($fila = $results->fetch_assoc()){
-            $tasks = $fila;
+            $tasks[] = $fila;
         }
         return json_encode($tasks, JSON_PRETTY_PRINT);
     }else{
@@ -33,7 +33,14 @@ function getAllTasks($conn){
     }
 };
 
-function createTask($task){
-    
-}
+function createTask($conn, $task){
+    $queryCreateTask = "INSERT INTO tareas (titulo, descripcion, estado) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($queryCreateTask); // Consultas "preparadas" para evitar inyección sql
+    $stmt->bind_param("sss", $task['titulo'], $task['descripcion'], $task['estado']); // el parámetro "sss" indica que todos los valores son de tipo string, si fuesen distintos podría ser i: Integer, d: Double, s: String, b: Blob(binarios)
+    if($stmt->execute()){
+        return "Tarea creada exitosamente.";
+    }else{
+        return "Error al crear la tarea: ".$stmt->error;
+    }
+};
 ?>

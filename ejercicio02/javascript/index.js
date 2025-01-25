@@ -22,14 +22,18 @@ $(document).ready(function(){
 
     $("#add-task").on("submit", function(event){
         event.preventDefault();
+        var formData = $(this).serializeArray();
+        var jsonData = {};
+        $.each(formData, function(){
+            jsonData[this.name] = this.value;
+        })
         $.ajax({
             url: '../php/scripts/tareas.php',
-            data: $(this).serialize(),
-            contentType: 'application/json',
+            data: JSON.stringify(jsonData),
+            contentType: 'application/json ; charset=UTF-8',
             method: 'POST',
             success: function(response){
-                console.log("HECHO");
-                console.log(response);
+                $(".container").html(response);
             },
             error: function(){
                 console.error("Error en la petición.");

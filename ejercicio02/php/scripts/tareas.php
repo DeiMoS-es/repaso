@@ -15,9 +15,11 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
     // var_dump($tasks);
 }
 elseif($_SERVER['REQUEST_METHOD'] === 'POST'){
-    echo"hola";
-    $inputs = file_get_contents("php://input");
-    var_dump($inputs);
+    $task = file_get_contents("php://input");
+    $task = json_decode($task, true);
+    createTask($conn, $task);
+    $tasks = getAllTasks($conn);
+    tableTasks($tasks);
 }else{
     echo "nada.";
 }
