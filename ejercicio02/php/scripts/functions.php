@@ -19,4 +19,7 @@ function existTable($conn, $result){
         return "La tabla 'tareas' ya existe";
     }
 }
+
+// Función para obtener todas las tareas
+function getAllTasks(){}
 ?>
