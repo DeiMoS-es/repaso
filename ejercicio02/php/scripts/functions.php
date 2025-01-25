@@ -53,5 +53,18 @@ function deleteTask($conn, $idTask){
     }else{
         return "Error al eliminar la tarea. ".$stmt->error;
     }
+};
+
+function editarEstadoTask($conn, $data){
+    $idTask = $data['id'];
+    $estado = $data['estado'];
+    $queryEditTask = "UPDATE tareas SET estado = ? WHERE id = ?";
+    $stmt = $conn->prepare($queryEditTask);
+    $stmt->bind_param("si", $estado, $idTask);
+    if($stmt->execute()){
+        return "Estado modificado.";
+    }else{
+        return "Error al editar el estado: ".$stmt->error;
+    }
 }
 ?>

@@ -25,6 +25,12 @@ elseif($_SERVER['REQUEST_METHOD'] === 'POST'){
     deleteTask($conn, $idTask);
     $tasks = getAllTasks($conn);
     tableTasks($tasks);
+}elseif($_SERVER['REQUEST_METHOD'] === 'PUT'){
+    $data = file_get_contents("php://input");
+    $data = json_decode($data, true);
+    editarEstadoTask($conn, $data);
+    $tasks = getAllTasks($conn);
+    tableTasks($tasks);
 }
 else{
     echo "nada.";
