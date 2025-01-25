@@ -43,4 +43,15 @@ function createTask($conn, $task){
         return "Error al crear la tarea: ".$stmt->error;
     }
 };
+
+function deleteTask($conn, $idTask){
+    $queryDeleteTask = "DELETE FROM tareas WHERE id = ?";
+    $stmt = $conn->prepare($queryDeleteTask);
+    $stmt->bind_param("i", $idTask);
+    if($stmt->execute()){
+        return "Tarea eliminada.";
+    }else{
+        return "Error al eliminar la tarea. ".$stmt->error;
+    }
+}
 ?>

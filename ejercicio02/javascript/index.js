@@ -16,9 +16,7 @@ $(document).ready(function(){
     $(document).on('click', '.btn.editar', function(){
         console.log("click");
     });
-    $(document).on('click', '.btn.eliminar', function(){
-        console.log("click");
-    });
+    $(document).on('click', '.btn.eliminar', eliminar);
 
     $("#add-task").on("submit", function(event){
         event.preventDefault();
@@ -40,4 +38,20 @@ $(document).ready(function(){
             }
         });
     });
+
+    function eliminar(){
+        let idTarea = $(this).parent().parent().children().first().text();
+        $.ajax({
+            url: '../php/scripts/tareas.php',
+            data: idTarea,
+            method: 'DELETE',
+            success: function(response){
+                $(".container").html(response);
+                // console.log(response);
+            },
+            error: function(){
+                console.error("Error en la petición.");
+            }
+        });
+    };
 });

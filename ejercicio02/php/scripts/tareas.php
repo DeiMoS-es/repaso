@@ -20,7 +20,13 @@ elseif($_SERVER['REQUEST_METHOD'] === 'POST'){
     createTask($conn, $task);
     $tasks = getAllTasks($conn);
     tableTasks($tasks);
-}else{
+}elseif($_SERVER['REQUEST_METHOD'] === 'DELETE'){
+    $idTask = file_get_contents("php://input");
+    deleteTask($conn, $idTask);
+    $tasks = getAllTasks($conn);
+    tableTasks($tasks);
+}
+else{
     echo "nada.";
 }
 // echo $exisTable;
