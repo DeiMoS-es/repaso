@@ -3,7 +3,7 @@ $(document).ready(function(){
     const divContainer = $(".container");
     // Mostramos las tareas
     $.ajax({
-        url: '../php/tareas.php',
+        url: '../php/scripts/tareas.php',
         method: 'GET',
         success: function(data){
             divContainer.html(data);

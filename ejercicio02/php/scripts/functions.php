@@ -15,11 +15,21 @@ function existTable($conn, $result){
         }else{
             return "Error al crear la tabla: " . mysqli_error($conn);
         }
-    }else{
-        return "La tabla 'tareas' ya existe";
     }
-}
+};
 
 // Función para obtener todas las tareas
-function getAllTasks(){}
+function getAllTasks($conn){
+    $queryGetAllTasks = "SELECT * FROM tareas";
+    $results = $conn->query($queryGetAllTasks);
+    $tasks = [];
+    if($results->num_rows > 0){
+        while($fila = $results->fetch_assoc()){
+            $tasks = $fila;
+        }
+        return json_encode($tasks, JSON_PRETTY_PRINT);
+    }else{
+        return json_encode(["message" => "No hay tareas."]);
+    }
+};
 ?>
