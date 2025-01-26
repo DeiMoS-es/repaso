@@ -15,13 +15,13 @@ $(document).ready(function(){
                 alert(data);
                 // Verificar si la respuesta contiene un mensaje de éxito
                 if (data.includes("Usuario registrado correctamente")) {
-                    console.log("object");
                     // Redirigir a index.html en caso de éxito
                     window.location.href = 'index.html';
                 };
             },
-            error: function(){
-                console.error("Error en la petición.");
+            error: function(error){
+                let errorJson = JSON.parse(error.responseText);
+                console.error(errorJson.message);
             }
         });
     });

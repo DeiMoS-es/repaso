@@ -36,15 +36,18 @@ function registrarUsuario($conn, $user){
     $stmt->bind_param("sss", $user['username'], $user['email'], $pass);
     try {
         if($stmt->execute()){
-            return "Usuario registrado correctamente.";
+            http_response_code(201);
+            return json_encode(["message" => "Usuario registrado correctamente."]);
         }else{
             throw new Exception("Error al registrar usuario: ".$stmt->error) ;
         }
     } catch (mysqli_sql_exception $e) {
         if ($e->getCode() == 1062) {
-            return "Error: El correo electrónico ya está registrado.";
+            http_response_code(409);
+            return json_encode(["message" => "Error: El correo electrónico ya está registrado."]);
         } else {
-            return "Error al registrar usuario: " . $e->getMessage();
+            http_response_code(500);
+            return json_encode(["message" => "Error al registrar usuario: " . $e->getMessage()]);
         }
     }    
 };
