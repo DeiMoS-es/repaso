@@ -52,4 +52,40 @@ function registrarUsuario($conn, $user){
     }    
 };
 
+// Función para el Login de usuarios
+function loginUser($conn, $user){
+    $findUserByUserName = "SELECT * FROM users WHERE email = ?";
+    $stmt = $conn->prepare($findUserByUserName);
+    $stmt->bind_param("s", $user['email']);
+    try {
+        if($stmt->execute()){
+            // Obtener resultados
+            $result = $stmt->get_result();
+            if($result->num_rows > 0){
+                // El usuario existe
+                $row = $result->fetch_assoc();
+                if(password_verify($user['password'], $row['password'])){
+                    // Inicio de sesión
+                    $_SESSION['user_id'] = $row['id'];
+                    $_SESSION['username'] = $row['username'];
+                    http_response_code(200);
+                    return json_encode(["message" => "Login correcto."]);
+                }else{
+                    http_response_code(401);
+                    return json_encode(["message" => "Contraseña incorrecta."]);
+                }
+            }else{
+                http_response_code(404);
+                return json_encode(["message" => "Usuario no encontrado."]);
+            }
+        }else{
+            http_response_code(500);
+            return json_encode(["message" => "Error al ejecutar la consulta."]);
+        }
+    } catch (\Throwable $th) {
+        http_response_code(500);
+        return json_encode(["message" => "Error del servidor: ". $th->getMessage()]);
+    }
+};
+
 ?>
