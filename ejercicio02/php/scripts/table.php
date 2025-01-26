@@ -1,11 +1,8 @@
 <?php
-function tableTasks($tasks)
-{
+function tableTasks($tasks){
     $tasksArray = json_decode($tasks, true);
     $keys = array_keys($tasksArray[0]);
     $tasks = json_decode($tasks, true);
-    // var_dump($keys);
-    // var_dump($tasks);
 ?>
     <table border="1" id="tasks" class="table-tasks">
         <tr>

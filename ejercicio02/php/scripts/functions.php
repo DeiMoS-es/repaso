@@ -2,7 +2,7 @@
 // Función para comprobar si una tabla existe en BBDD
 function existTable($conn, $result){
     if(mysqli_num_rows($result) == 0){
-        // La tabla no existe se crea:
+        // La tabla no existe se crea
         $createTable = 'CREATE TABLE tareas (
             id INT AUTO_INCREMENT PRIMARY KEY,
             titulo VARCHAR(255) NOT NULL,

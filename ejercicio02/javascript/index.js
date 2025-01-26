@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    console.log("Script cargado.");
     const divContainer = $(".container");
     // Mostramos las tareas
     $.ajax({
@@ -22,11 +21,11 @@ $(document).ready(function(){
         var jsonData = {};
         $.each(formData, function(){
             jsonData[this.name] = this.value;
-        })
+        });
         $.ajax({
             url: '../php/scripts/tareas.php',
             data: JSON.stringify(jsonData),
-            contentType: 'application/json ; charset=UTF-8',
+            contentType: 'application/json; charset=UTF-8',
             method: 'POST',
             success: function(response){
                 $(".container").html(response);

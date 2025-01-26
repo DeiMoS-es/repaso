@@ -3,7 +3,6 @@
 // Si no se que variables me llegan desde el formulario
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     foreach($_POST as $key => $value){
-        echo"-----------<br>";
         // echo htmlspecialchars($key) . ': ' . htmlspecialchars($value) . '<br>';
         $data[$key] = htmlspecialchars($value);
         // var_dump($data);
@@ -49,11 +48,9 @@ function crearDataJson($data){
                 }
             }
         }
-            $dataJson[] = $data;
-            file_put_contents($rutaJson, json_encode($dataJson, JSON_PRETTY_PRINT));
-        
+        $dataJson[] = $data;
+        file_put_contents($rutaJson, json_encode($dataJson, JSON_PRETTY_PRINT));
     }
-    // echo 'Archivo creado<br>';
 };
 
 function getAllTasksFromJson(){

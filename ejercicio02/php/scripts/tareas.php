@@ -12,7 +12,6 @@ $exisTable = existTable($conn, $result);
 if($_SERVER['REQUEST_METHOD'] === 'GET'){
     $tasks = getAllTasks($conn);
     tableTasks($tasks);
-    // var_dump($tasks);
 }
 elseif($_SERVER['REQUEST_METHOD'] === 'POST'){
     $task = file_get_contents("php://input");
