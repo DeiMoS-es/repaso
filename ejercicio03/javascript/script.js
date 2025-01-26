@@ -21,6 +21,7 @@ $(document).ready(function(){
             },
             error: function(error){
                 let errorJson = JSON.parse(error.responseText);
+                alert(errorJson.message);
                 console.error(errorJson.message);
             }
         });
