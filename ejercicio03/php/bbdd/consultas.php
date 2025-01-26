@@ -36,7 +36,7 @@ function registrarUsuario($conn, $user){
     $stmt->bind_param("sss", $user['username'], $user['email'], $pass);
     try {
         if($stmt->execute()){
-            return "Usuario regitrado correctamente.";
+            return "Usuario registrado correctamente.";
         }else{
             throw new Exception("Error al registrar usuario: ".$stmt->error) ;
         }

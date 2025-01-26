@@ -7,6 +7,7 @@ Registro de usuario:
 Un formulario HTML para capturar el nombre de usuario, correo electrónico y contraseña.
 Validación del correo electrónico para asegurarte de que tiene un formato válido.
 Las contraseñas deben almacenarse encriptadas (usa password_hash() de PHP).
+
 Inicio de sesión:
 
 Un formulario de login que permita a los usuarios ingresar con su correo electrónico y contraseña.
