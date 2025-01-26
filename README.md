@@ -1,16 +1,8 @@
-Ejercicio 1:
-"Construcción de una aplicación básica de gestión de tareas."
+# Ejercicio 01:
+- Ejercicio básico de crud de tareas en este caso, almacenando los datos en un archivo JSON.
 
-Enunciado: Crea una aplicación en PHP Nativo que permita gestionar tareas con las siguientes 
-funcionalidades:
+# Ejercicio 02:
+- Ejercicio básico de crud de tareas, almacenando los datos en una BBDD MySQL.
 
-Registrar una nueva tarea con un título, descripción 
-y estado (pendiente, en progreso, completada).
-
-Mostrar una lista de todas las tareas en una tabla.
-
-Permitir editar el estado de una tarea.
-
-Permitir eliminar una tarea.
-
-ESTA VEZ EN BBDD
+# Ejercicio 03:
+- Ejercicio básico de autenticación, registro de usuario y manejo de sesiones.
