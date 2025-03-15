@@ -1,5 +1,5 @@
 <?php
-
+require_once 'MOD.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
