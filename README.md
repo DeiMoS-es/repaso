@@ -6,3 +6,6 @@
 
 # Ejercicio 03:
 - Ejercicio básico de autenticación, registro de usuario y manejo de sesiones.
+
+# Ejercicio 04:
+- Ejercicio de conexiones a BBDD employee, querys, manejo de errores, creación pantallas.
