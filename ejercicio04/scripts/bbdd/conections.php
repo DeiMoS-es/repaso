@@ -9,7 +9,7 @@ $port = 3306;
 
 $conexionID = new mysqli($server, $userName, $password, $database, $port);
 
-// Verificar si la conexión es exitosa
+// Verificar si la conexión falla
 if ($conexionID->connect_error) {
     die("Error de conexión: " . $conexionID->connect_error);
 }
