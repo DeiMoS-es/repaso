@@ -9,3 +9,5 @@
 
 # Ejercicio 04:
 - Ejercicio de conexiones a BBDD employee, querys, manejo de errores, creación pantallas.
+    - **Observaciones:**
+        - En Linux al crear archivos hay que ajustar los permisos, se puede hacer lanznado el comando `sudo chmod -R 755 /ejercicio04/`.
