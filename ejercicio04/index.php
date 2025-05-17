@@ -11,8 +11,8 @@ require_once 'MOD.php';  // Este archivo incluye la conexión y la consulta
     <title>Portal empleados</title>
 </head>
 <body>
-    <h1>Lista de Empleados</h1>
-    <?php var_dump(count($empleados)); ?>
+   
+    
 
     <!-- cdn jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
